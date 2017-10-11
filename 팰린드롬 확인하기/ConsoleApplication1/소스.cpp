@@ -1,42 +1,38 @@
 #include <iostream>
-#include <stack>
 using namespace std;
 
-stack<char> stk;
-int visited[26];
-char str[53];
-
-void printArr() {
-	for (int i = 0; i < 26; i++)
-		cout << visited[i] << " ";
-	cout << "\n";
-}
+int map[1001][3];
+int n, k;
+int ans = 0;
 
 int main() {
-	
-	fill_n(visited,26,0);
-	
-	cin >> str;
+	cin >> n >> k;
 
-	int idx = 0;
-	int ans = 0;
-
-	while (str[idx] != 0) {		
-		if (visited[(int)str[idx]-65] == 0) {
-			stk.push(str[idx]);
-			visited[(int)str[idx]-65] = 1;
-		}
-		else {
-			if (stk.top() == str[idx])
-				stk.pop();
-			else {
-				ans = stk.size();
-			}
-		}
-		//printArr();
-		idx++;
+	for (int i = 1; i <= n; i++) {
+		int tmp;
+		scanf("%d", &tmp);
+		int a, b, c;
+		scanf("%d %d %d", &map[tmp][0], &map[tmp][1], &map[tmp][2]);
 	}
 
-	cout << ans << endl;
-	return 0;
+	for (int i = 1; i <= n; i++) {
+
+		if (i != k)
+		{
+			if (map[i][0] > map[k][0])
+				ans++;
+			else if (map[i][0] == map[k][0]) {
+				if (map[i][1] > map[k][1])
+					ans++;
+				else if (map[i][1] == map[k][1]) {
+					if (map[i][2] > map[k][2])
+						ans++;
+				}
+			}
+
+		}
+
+		cout << ans + 1 << endl;
+		return 0;
+	}
 }
